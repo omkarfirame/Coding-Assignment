@@ -36,20 +36,20 @@ def plotData(X,y):
     return(a,b,c,d)
     
 #%%
-def computeCost(theta,x,y):
+def computeCost(theta,X,y):
     fun_J =[]
     for m in np.arange(len(X)):
-        J = (np.dot(np.transpose(theta),new_X.iloc[m,:]) - y[m])**2
+        J = (np.dot(np.transpose(theta),X.iloc[m,:]) - y[m])**2
         fun_J.append(J)
     cost_fun = 0.5 * np.sum(fun_J) / len(X)      
     return(print("Cost Function : ",cost_fun))
 #%%
-def gradientDescent(theta,x,y):
+def gradientDescent(theta,X,y):
     theta_new=[]
     for i in np.arange(len(X)):
         deriv_term=[]
-        for j in np.arange(new_X.shape[1]):
-            derivative_J = (np.dot(np.transpose(theta),new_X.iloc[i,:]) - y[i])[0] * new_X.iloc[i,j]
+        for j in np.arange(X.shape[1]):
+            derivative_J = (np.dot(np.transpose(theta),X.iloc[i,:]) - y[i])[0] * X.iloc[i,j]
             deriv_term.append(derivative_J)
         n_deriv = np.array(deriv_term)
         n_deriv = np.matrix(n_deriv)
@@ -57,7 +57,7 @@ def gradientDescent(theta,x,y):
     
     theta_new_dataframe = pd.DataFrame(list(map(np.ravel, theta_new)))
  
-    for i in np.arange(new_X.shape[1]):    
+    for i in np.arange(X.shape[1]):    
         theta2 = theta.iloc[i,0] - (alpha * np.sum(theta_new_dataframe.iloc[i,:])) / len(X)
         theta.iloc[i,0] = theta2
     return(theta)
