@@ -21,9 +21,7 @@ def mapFeature(x1,x2):
 def sigmoid(z):
     return(1 / (1 + np.exp(-z)))
 
-
 def costFunctionReg(theta,X,y,Lambda):
-    cost=0 
     z = np.dot(X,theta)
     hypothesis = sigmoid(z)
     term1 = np.dot(y.T,np.log(hypothesis))
@@ -32,16 +30,6 @@ def costFunctionReg(theta,X,y,Lambda):
     error = hypothesis - y
     gradient = (np.dot(X.T,error) / len(X)) + ((Lambda * theta) / len(X))
     return(cost,gradient)
-
-def Gradient(theta,X,y,Lambda):
-        
-    z = np.dot(X,theta)
-    hypothesis = sigmoid(z)
-    error = hypothesis - y
-    grad_1 = (np.dot(X.T,error) / len(X))[0]
-    grad_2 = (np.dot(X.T,error) / len(X))[1:] + ((Lambda * theta[1:]) / len(X))
-    grad = np.vstack((grad_1,grad_2))
-    return(grad)
 
 def gradientdescent(theta,X,y,alpha,Lambda,iteration):
     for i in np.arange(iteration):
