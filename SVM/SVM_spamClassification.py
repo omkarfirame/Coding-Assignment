@@ -39,11 +39,11 @@ def processEmail(file_contents,vocabList_d):
     ps = PorterStemmer()
     file_contents = [ps.stem(token) for token in file_contents.split(" ")]
     file_contents= " ".join(file_contents)
-    
 
     indices = [vocabList_d[t] for t in file_contents.split() if t in vocabList_d]
 
     return(indices)
+
 indices = processEmail(file_contents,vocabList_d)
 indices = [int(i) for i in indices] 
 #%%
